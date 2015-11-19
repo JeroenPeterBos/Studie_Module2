@@ -38,7 +38,8 @@ public class Room {
      *         <code>null</code> if this <code>Room</code> 
      *         is not currently rented
      */
-    public Guest getGuest() {
+    
+    /*@ pure */ public Guest getGuest() {
     	return guest;
     }
     

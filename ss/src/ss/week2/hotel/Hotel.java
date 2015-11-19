@@ -28,6 +28,10 @@ public class Hotel {
 	 * @param name name of the guest
 	 * @return A object <code>Room</code> with a <code>Guest</code> of the given name checked in.
 	 */
+	//@ requires Password.acceptable(pass);
+	//@ requires name != "";
+	//@ ensures \old(getFreeRoom()).getGuest() != null;
+	//@ ensures \old(getFreeRoom()).getGuest().getRoom() != null;
 	public Room checkIn(String pass, String name){
 		if(!password.testWord(pass) || getFreeRoom() == null || getRoom(name) != null) {
 			return null;
@@ -43,15 +47,16 @@ public class Hotel {
 	 * Checks out the guest and the safe in the room is deactivated.
 	 * @param name name of the guest
 	 */
+	//@ requires name != "";
+	//@ ensures \old(getRoom(name)).getGuest() == null;
+	//@ ensures !\old(getRoom(name)).getSafe().isActive();
 	public void checkOut(String name){
 		Room r = getRoom(name);
 		
-		if(r == null){
-			return;
+		if(r != null){
+			r.getGuest().checkout();
+			r.getSafe().deactivate();
 		}
-		
-		r.getGuest().checkout();
-		r.getSafe().deactivate();
 	}
 	// ------------------------ Queries ---------------------------------- //
 	
@@ -98,10 +103,11 @@ public class Hotel {
 	public String toString(){
 		String result = "";
 		result += hotelName;
-		if(room1 != null && room1.getGuest() != null)
+		if(room1 != null && room1.getGuest() != null){
 			result += " " + room1.getGuest().getName();
-		if(room2 != null && room2.getGuest() != null)
+		} else if(room2 != null && room2.getGuest() != null) {
 			result += " " + room2.getGuest().getName();
+		}
 		return result;
 	}
 }

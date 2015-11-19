@@ -1,4 +1,4 @@
-package ss.week2;
+fpackage ss.week2;
 
 public class Rectangle {
 
@@ -20,13 +20,11 @@ public class Rectangle {
 	
 	//@ ensures \result > 0;
 	/*@ pure */ public int length(){
-		assert length > 0;
 		return length;
 	}
 	
 	//@ ensures \result > 0;
 	/*@ pure */ public int width(){
-		assert width > 0;
 		return width;
 	}
 	
@@ -35,8 +33,6 @@ public class Rectangle {
 	   ensures \result == length() * width();
 	 */
 	/*@ pure */ public int area(){
-		assert length() > 0;
-		assert width() > 0;
 		return length() * width();
 	}
 	/*@ requires length() > 0;
@@ -44,8 +40,6 @@ public class Rectangle {
 	   ensures \result > 0;
 	 */
 	/*@ pure */ public int perimeter(){
-		assert length() > 0;
-		assert width() > 0;
 		return (length() + width()) * 2;
 	}
 	
