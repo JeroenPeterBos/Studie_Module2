@@ -22,7 +22,9 @@ public class CustomRectangleTest {
 	
 	@Test
 	public void testInitialValue(){
-		assertEquals(100, a.width());
+		assertEquals(100, a.length());
+		assertEquals(75, b.length());
+		assertEquals(50, a.width());
 		assertEquals(75, b.width());
 	}
 	
