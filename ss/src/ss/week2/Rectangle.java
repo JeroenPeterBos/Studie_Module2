@@ -3,12 +3,14 @@ package ss.week2;
 public class Rectangle {
 
 	// -------------------- Instance variables ------------------ //
+	//@ private invariant length > 0;
 	private int length;
+	//@ private invariant width > 0;
 	private int width;
 	
 	// -------------------- Constructors ------------------------ //
-	//@ ensures length() > 0;
-	//@ ensures width() > 0;
+	//@ requires len > 0 && wid > 0;
+	//@ ensures length() == len && width() == wid;
 	public Rectangle(int len, int wid){
 		this.length = len;
 		this.width = wid;
@@ -30,7 +32,7 @@ public class Rectangle {
 	
 	/*@ requires length() > 0;
 	   requires width() > 0;
-	   ensures \result > 0;
+	   ensures \result == length() * width();
 	 */
 	/*@ pure */ public int area(){
 		assert length() > 0;

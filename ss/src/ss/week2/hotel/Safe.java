@@ -13,6 +13,7 @@ public class Safe{
 	// ------------------------- Instance Variables ------------------ //
 	
 	private Password password;
+	//@ private invariant open ==> active && !active ==> !open;
 	private boolean active;
 	private boolean open;
 	
@@ -40,6 +41,8 @@ public class Safe{
 	 * @param pass the given password to try
 	 */
 	//@ requires Password.acceptable(pass);
+	//@ ensures \old(isActive()) ==> isActive();
+	//@ ensures !\old(isActive()) && getPassword().testWord(pass) ==> isActive();
 	public void activate(String pass){
 		assert Password.acceptable(pass);
 		if(password.testWord(pass))
@@ -49,6 +52,7 @@ public class Safe{
 	/**
 	 * Closes the safe and then deactivates the safe.
 	 */
+	//@ ensures !isActive() && !isOpen();
 	public void deactivate(){
 		close();
 		active = false;
@@ -59,6 +63,8 @@ public class Safe{
 	 * @param pass the given password to try
 	 */
 	//@ requires Password.acceptable(pass);
+	//@ ensures \old(isOpen()) ==> isOpen();
+	//@ ensures !\old(isOpen()) && getPassword().testWord(pass) ==> isOpen();
 	public void open(String pass){
 		assert Password.acceptable(pass);
 		if(password.testWord(pass) && active){
@@ -69,6 +75,7 @@ public class Safe{
 	/**
 	 * Closes the safe, but does not affect the active status.
 	 */
+	//@ ensures !isOpen();
 	public void close(){
 		open = false;
 	}
@@ -96,5 +103,10 @@ public class Safe{
 	 */
 	/*@ pure */ public Password getPassword(){
 		return password; 
+	}
+	
+	public static void main(String[] args){
+		Safe s = new Safe("ww");
+		s.open("test");
 	}
 }

@@ -8,7 +8,7 @@ package ss.week2;
 public class Lamp {
 	
 	// ------------------------- Enumerations ------------------------//
-	public enum Setting{ 
+	public static enum Setting{ 
 		OFF, LOW, MEDIUM, HIGH;
 		
 		private Setting next;
@@ -18,8 +18,8 @@ public class Lamp {
 			LOW.next = MEDIUM;
 			MEDIUM.next = HIGH;
 			HIGH.next = OFF;
-		}
-		
+		}	
+			
 		/* pure */ public Setting next(){
 			return next;
 		}
@@ -45,7 +45,7 @@ public class Lamp {
 	/** 
 	 * Returns the current setting
 	 */
-	//@ ensures \result == setting;
+	//@ ensures \result == LOW || \result == ;
 	/*@ pure */ public Setting getSetting(){
 		return setting;
 	}

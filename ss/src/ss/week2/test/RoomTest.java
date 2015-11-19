@@ -6,6 +6,7 @@ import ss.week2.hotel.Guest;
 import ss.week2.hotel.Room;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RoomTest {
     private Guest guest;
@@ -26,5 +27,16 @@ public class RoomTest {
     public void testSetGuest() {
         room.setGuest(guest);
         assertEquals(guest, room.getGuest());
+    }
+    @Test
+    public void testSetRoom() {
+    	guest.checkin(room);
+    	assertEquals(room, guest.getRoom());
+    }
+    
+    @Test
+    public void testSetSafePass() {
+    	room.getSafe().getPassword().setWord("kut_jml", "leptoptasch");
+    	assertTrue( room.getSafe().getPassword().testWord("leptoptasch"));
     }
 }
