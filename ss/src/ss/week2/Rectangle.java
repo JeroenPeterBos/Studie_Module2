@@ -1,4 +1,4 @@
-fpackage ss.week2;
+package ss.week2;
 
 public class Rectangle {
 
