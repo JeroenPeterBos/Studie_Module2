@@ -1,4 +1,6 @@
-package ss.week2.hotel;
+package ss.week3.hotel;
+
+import java.io.PrintStream;
 
 public class Hotel {
 
@@ -95,6 +97,34 @@ public class Hotel {
 	 */
 	public Password getPassword(){
 		return password;
+	}
+	
+	public Bill getBill(String name, int noNights, PrintStream ps){
+		Room r;
+		if(room1.getGuest().getName().equals(name)){
+			r = room1;
+		} else if (room2.getGuest().getName().equals(name)){
+			r = room2;
+		} else {
+			return null;
+		}
+		
+		Safe s = r.getSafe();
+		if(!(r instanceof PricedRoom)){
+			return null;
+		}
+		PricedRoom room = (PricedRoom)r;
+		Bill result = new Bill(ps);
+		
+		for(int i = 0; i < noNights; i++){
+			result.newItem(room);
+		}
+		
+		if(s instanceof PricedSafe){
+			PricedSafe sa = (PricedSafe) s;
+			result.newItem(sa);
+		}
+		return result;
 	}
 	
 	/**

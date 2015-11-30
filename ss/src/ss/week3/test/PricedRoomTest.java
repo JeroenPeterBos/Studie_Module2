@@ -16,7 +16,7 @@ public class PricedRoomTest {
 
     @Before
     public void setUp() throws Exception {
-        item = new PricedRoom(0, PRICE, 0);
+        item = new PricedRoom(0, PRICE, (double)0.00);
     }
 
     @Test

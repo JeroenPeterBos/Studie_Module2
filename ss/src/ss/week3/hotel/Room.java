@@ -1,4 +1,4 @@
-package ss.week2.hotel;
+package ss.week3.hotel;
 
 /**
  * Hotel room with number and possibly a guest.
@@ -21,6 +21,11 @@ public class Room {
     public Room(int no) {
     	number = no;
     	safe = new Safe("kut_jml");
+    }
+    
+    public Room(int no, Safe s){
+    	number = no;
+    	safe = s;
     }
 
     // ------------------ Queries --------------------------
