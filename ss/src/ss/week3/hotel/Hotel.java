@@ -100,19 +100,13 @@ public class Hotel {
 	}
 	
 	public Bill getBill(String name, int noNights, PrintStream ps){
-		Room r;
-		if(room1.getGuest().getName().equals(name)){
-			r = room1;
-		} else if (room2.getGuest().getName().equals(name)){
-			r = room2;
-		} else {
+		Room r = getRoom(name);
+		
+		if(r == null || !(r instanceof PricedRoom)){
 			return null;
 		}
 		
 		Safe s = r.getSafe();
-		if(!(r instanceof PricedRoom)){
-			return null;
-		}
 		PricedRoom room = (PricedRoom)r;
 		Bill result = new Bill(ps);
 		
@@ -124,6 +118,8 @@ public class Hotel {
 			PricedSafe sa = (PricedSafe) s;
 			result.newItem(sa);
 		}
+		
+		result.close();
 		return result;
 	}
 	

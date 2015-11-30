@@ -27,15 +27,23 @@ public class TimedPassword extends Password{
 	 * Validates if the timedpassword is still valid.
 	 * @return wether the password is expired or not.
 	 */
-	public boolean isExpired(){
+	/*@ pure */ public boolean isExpired(){
 		return (startTime + validTime < System.currentTimeMillis());
 	}
 	
 	/**
 	 * Sets the new word (see class Password) and resets the startTime.
 	 */
+	//@ ensures \old(getStartTime()) != getStartTime();
 	public boolean setWord(String oldpass, String newpass){
-		startTime = System.currentTimeMillis();
-		return super.setWord(oldpass, newpass);
+		if(super.setWord(oldpass, newpass)){
+			startTime = System.currentTimeMillis();
+			return true;
+		}
+		return false;
+	}
+	
+	public long getStartTime(){
+		return startTime;
 	}
 }

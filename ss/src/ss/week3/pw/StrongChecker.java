@@ -16,7 +16,7 @@ public class StrongChecker extends BasicChecker{
 	 * Generates a password following the StrongChecker rules
 	 */
 	//@ ensures acceptable(\result); 
-	public String generatePassword(){
+	/*@ pure */ public String generatePassword(){
 		return "a" + super.generatePassword() + "1";
 	}
 }

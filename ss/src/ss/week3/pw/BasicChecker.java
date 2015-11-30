@@ -8,7 +8,7 @@ public class BasicChecker implements Checker{
 	 * Checks if a Password follows the BasicChecker rules
 	 */
 	@Override
-	public boolean acceptable(String s) {
+	/*@ pure */ public boolean acceptable(String s) {
 		return !(s.contains(" ") || s.length() < 6);
 	}
 	

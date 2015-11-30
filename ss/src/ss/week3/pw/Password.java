@@ -36,7 +36,7 @@ public class Password {
 	 * @param newpass the new password
 	 * @return true if the setword was succesful thus the pasword was changed 
 	 */
-	//@ ensures testWord(oldpass) && !oldpass.equals(newpass) ==> \old(factoryPassword) != factoryPassword;
+	//@ ensures \old(testWord(oldpass)) && !oldpass.equals(newpass) ==> testWord(newpass);
 	public boolean setWord(String oldpass, String newpass){
 		boolean result = false;
 		
@@ -47,4 +47,6 @@ public class Password {
 		
 		return result;
 	}
+	
+	
 }
