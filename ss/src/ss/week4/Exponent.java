@@ -1,18 +1,17 @@
 package ss.week4;
 
-public class Product implements Function {
+public class Exponent implements Function {
 
 	// ------------------------------- Enumerations ------------------------------------ //
 	
 	// ------------------------------- Instance Variables ------------------------------ //
 	
-	protected Function a, b;
+	private int n;
 	
 	// ------------------------------- Constructors ------------------------------------ //
 	
-	public Product(Function a, Function b) {
-		this.a = a;
-		this.b = b;
+	public Exponent(int n) {
+		this.n = n;
 	}
 	
 	// ------------------------------- Commands ---------------------------------------- //
@@ -21,16 +20,26 @@ public class Product implements Function {
 	
 	@Override
 	public double apply(double x) {
-		return a.apply(x) * b.apply(x);
+		double result = 1;
+		
+		if (x == 0) {
+			return 0;
+		}
+		
+		for (int i = 0; i < n; i++) {
+			result *= x;
+		}
+		
+		return result;
 	}
 	
 	@Override
 	public Function derivative() {
-		return new Sum(new Product(a.derivative(), b), new Product(a, b.derivative()));
+		return new LinearProduct(new Constant(n), new Exponent(n - 1));
 	}
 	
 	@Override
 	public String toString() {
-		return a.toString() + " * " + b.toString();
+		return "x^" + Integer.toString(n);
 	}
 }
