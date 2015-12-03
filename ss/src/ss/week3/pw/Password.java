@@ -48,5 +48,7 @@ public class Password {
 		return result;
 	}
 	
-	
+	public Checker getChecker(){
+		return checker;
+	}
 }
